@@ -12,20 +12,19 @@ class UserAuthentication {
     }
 
     // Method to authenticate user
-    public function authenticateUser($username, $password) {
+    public function authenticateUser($usernamedata, $passworddata) {
         session_start();
 
-        if(isset($username, $password)) {
-            $username = $this->conn->real_escape_string($username);
-            $password = $this->conn->real_escape_string($password);
+        if(isset($usernamedata, $passworddata)) {
+            $username = $this->conn->real_escape_string($usernamedata);
+            $password = $this->conn->real_escape_string($passworddata);
 
             $sql = "SELECT * FROM users_table WHERE user_name='$username' AND password='$password'";
             $result = $this->conn->query($sql);
 
             if ($result->num_rows > 0) {
                 $_SESSION['logged_in'] = true;
-                header("Location: homepage.php");
-                exit(); // Stop further execution after redirection
+                header("Location: Homepage.php");
             } else {
                 echo "Invalid username or password.";
             }
@@ -40,10 +39,7 @@ class UserAuthentication {
 $userAuth = new UserAuthentication($conn);
 
 // Check if form is submitted and call the authenticateUser method
-if(isset($_POST['username'], $_POST['password'])) {
-    $userAuth->authenticateUser($_POST['username'], $_POST['password']);
+if(isset($_POST['usernamedata'], $_POST['passworddata'])) {
+    $userAuth->authenticateUser($_POST['usernamedata'], $_POST['passworddata']);
 }
-
-// Close the database connection
-$conn->close();
 ?>

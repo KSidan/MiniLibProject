@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "sidan";
-$password = "akane";
+$username = "root";
+$password = "";
 $database = "sidan_db";
 
 // Create connection
