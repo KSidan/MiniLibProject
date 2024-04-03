@@ -24,7 +24,8 @@ class UserAuthentication {
 
             if ($result->num_rows > 0) {
                 $_SESSION['logged_in'] = true;
-                header("Location: Homepage.php");
+                header("location: ./Homepage.php");
+                exit;
             } else {
                 echo "Invalid username or password.";
             }
